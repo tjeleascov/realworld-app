@@ -18,13 +18,11 @@ test.describe('Notification', () => {
         ]);
     });
 
-    test('No notification', async ({ page }) => {
+    test('Go to notification', async ({ page }) => {
         // Click [data-test="nav-top-notifications-link"]
         await page.locator('[data-test="nav-top-notifications-link"]').click();
         await expect(page).toHaveURL('http://localhost:3000/notifications');
         // Click text=Notifications >> nth=1
         await page.locator('text=Notifications').nth(1).click();
-        // Click text=NotificationsNo Notifications >> div >> nth=1
-        await page.locator('text=NotificationsNo Notifications >> div').nth(1).click();
     });
 });
