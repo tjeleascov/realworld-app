@@ -17,11 +17,11 @@ const awsConfig = require(path.join(__dirname, "./aws-exports-es5.js"));
 module.exports = defineConfig({
   projectId: "7s5okt",
   env: {
-    apiUrl: "http://localhost:3001",
+    apiUrl: "http://localhost:3002",
     mobileViewportWidthBreakpoint: 414,
     coverage: false,
     codeCoverage: {
-      url: "http://localhost:3001/__coverage__",
+      url: "http://localhost:3002/__coverage__",
       exclude: "cypress/**/*.*",
     },
     defaultPassword: process.env.SEED_DEFAULT_USER_PASSWORD,
@@ -55,7 +55,7 @@ module.exports = defineConfig({
   },
   component: {
     devServer,
-    specPattern: "src/**/*.cy.{js,jsx,ts,tsx}",
+    specPattern: "cypress/tests/**/*.cy.{js,jsx,ts,tsx}",
     supportFile: "cypress/support/component.ts",
     setupNodeEvents(on, config) {
       codeCoverageTask(on, config);
