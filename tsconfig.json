@@ -1,8 +1,12 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": ".",
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -16,13 +20,22 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "noFallthroughCasesInSwitch": true,
-    "types": ["cypress"]
+    "types": [
+      "cypress"
+    ],
+    "paths": {
+      "@pages/*": ["playwright/pages/*"],
+      "@component/*": ["playwright/components/*"],
+      "@test-data/*": ["playwright/test-data/*"],
+      "@shared/*": ["playwright/shared/*"],
+    }
   },
   "include": [
     "src/**/*.cy.{js,ts,jsx,tsx}",
     "scripts",
     "backend",
     "src/__tests__",
-    "cypress/support/component.ts"
+    "cypress/support/component.ts",
+    "**/*.ts"
   ]
 }
