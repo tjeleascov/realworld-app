@@ -19,6 +19,14 @@ export default abstract class Component {
     await this.root.waitFor({ state: "hidden" });
   }
 
+  public async isVisible(): Promise<void> {
+    await this.root.isVisible();
+  }
+
+  public async isNotVisible(): Promise<boolean> {
+    return await this.root.isHidden();
+  }
+
   protected async click(): Promise<void> {
     await this.root.click();
   }

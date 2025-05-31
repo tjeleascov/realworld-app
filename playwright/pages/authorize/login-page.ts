@@ -10,12 +10,14 @@ export default class LoginPage extends BasePage {
   private readonly usernameInput: Input;
   private readonly passwordInput: Input;
   private readonly loginButton: Button;
+  private readonly signUpButton: Button;
 
   public constructor(page: Page) {
     super(page);
     this.usernameInput = new Input(page, page.getByRole("textbox", { name: "Username" }));
     this.passwordInput = new Input(page, page.getByRole("textbox", { name: "Password" }));
     this.loginButton = new Button(page, page.getByRole("button", { name: "Sign In" }));
+    this.signUpButton = new Button(page, page.getByText("Don't have an account? Sign Up"));
   }
 
   public async loginAsUser(user: TestUserData): Promise<void> {
@@ -26,9 +28,28 @@ export default class LoginPage extends BasePage {
         );
       }
 
-      await this.usernameInput.clearAndFill(user.getUserName());
-      await this.passwordInput.clearAndFill(user.getPassword());
-      await this.loginButton.click();
+      await this.fillUsername(user.getUserName());
+      await this.fillPassword(user.getPassword());
+      await this.clickLogin();
+    });
+  }
+
+  public async fillUsername(username: string): Promise<void> {
+    await this.usernameInput.clearAndFill(username);
+  }
+
+  public async fillPassword(password: string): Promise<void> {
+    await this.passwordInput.clearAndFill(password);
+  }
+
+  public async clickLogin(): Promise<void> {
+    await this.loginButton.click();
+  }
+
+  public async clickSignUp(): Promise<void> {
+    await test.step(`Click on the 'Don't have an account? Sign Up' button`, async () => {
+      await this.clickOutside();
+      await this.signUpButton.click();
     });
   }
 }

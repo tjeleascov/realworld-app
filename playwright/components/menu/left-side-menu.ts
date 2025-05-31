@@ -1,6 +1,7 @@
 import Button from "@component/common/button";
 import Component from "@component/common/component";
 import { test, expect, Locator, Page } from "@playwright/test";
+import TestUserData from "@test-data/data/test-user-data";
 
 export default class LeftSideMenu extends Component {
   private readonly homeButton: Button;
@@ -9,22 +10,29 @@ export default class LeftSideMenu extends Component {
   private readonly notificationsButton: Button;
   private readonly logoutButton: Button;
   private readonly userNameLocator: Locator;
+  private readonly fullNameLocator: Locator;
+  private readonly userBalanceLocator: Locator;
 
-  public constructor(page: Page, root: Locator) {
-    super(page, root);
+  public constructor(page: Page) {
+    super(page, page.locator("[data-test='sidenav']"));
 
-    this.homeButton = new Button(page, this.root.getByRole("button", { name: "Home" }));
-    this.myAccountButton = new Button(page, this.root.getByRole("button", { name: "My Account" }));
+    this.homeButton = new Button(page, this.root.locator(this.getByDataTest("sidenav-home")));
+    this.myAccountButton = new Button(
+      page,
+      this.root.locator(this.getByDataTest("sidenav-user-settings"))
+    );
     this.bankAccountsButton = new Button(
       page,
-      this.root.getByRole("button", { name: "Bank Accounts" })
+      this.root.locator(this.getByDataTest("sidenav-bankaccounts"))
     );
     this.notificationsButton = new Button(
       page,
-      this.root.getByRole("button", { name: "Notifications" })
+      this.root.locator(this.getByDataTest("sidenav-notifications"))
     );
-    this.logoutButton = new Button(page, this.root.getByRole("button", { name: "Logout" }));
+    this.logoutButton = new Button(page, this.root.locator(this.getByDataTest("sidenav-signout")));
     this.userNameLocator = page.locator(this.getByDataTest("sidenav-username"));
+    this.fullNameLocator = page.locator(this.getByDataTest("sidenav-user-full-name"));
+    this.userBalanceLocator = page.locator(this.getByDataTest("sidenav-user-balance"));
   }
 
   public async clickHome(): Promise<void> {
@@ -60,6 +68,19 @@ export default class LeftSideMenu extends Component {
   public async verifyUsernameEqualsTo(expectedUsername: string): Promise<void> {
     await test.step(`"Username" equals to "${expectedUsername}"`, async () => {
       await expect(this.userNameLocator).toHaveText("@" + expectedUsername);
+    });
+  }
+
+  public async verifyFullNameEqualsTo(fullName: TestUserData): Promise<void> {
+    const expectedFullName = fullName.getFirstName() + " " + fullName.getLastName().slice(0, 1);
+    await test.step(`"FullName" equals to "${expectedFullName}"`, async () => {
+      await expect(this.fullNameLocator).toHaveText(expectedFullName);
+    });
+  }
+
+  public async verifyUserBalanceIsVisbile(): Promise<void> {
+    await test.step(`Verify that user balance is visilbe`, async () => {
+      await expect(this.userBalanceLocator).toBeVisible();
     });
   }
 }

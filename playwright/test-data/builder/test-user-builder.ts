@@ -1,5 +1,4 @@
 import TestUserData from "@test-data/data/test-user-data";
-import { faker } from "@faker-js/faker";
 
 export default class TestUserDataBuilder {
   private testUserData: TestUserData;
@@ -10,7 +9,11 @@ export default class TestUserDataBuilder {
 
   public static existingLoginUser(): TestUserDataBuilder {
     const builder = new TestUserDataBuilder();
-    builder.testUserData.setUserName("Katharina_Bernier").setPassword("s3cret");
+    builder.testUserData
+      .setUserName("Katharina_Bernier")
+      .setPassword("s3cret")
+      .setFirstName("Edgar")
+      .setLastName("Johns");
     return builder;
   }
 
@@ -20,13 +23,8 @@ export default class TestUserDataBuilder {
     return builder;
   }
 
-  public static newSignupUser(): TestUserDataBuilder {
+  public static newUser(): TestUserDataBuilder {
     const builder = new TestUserDataBuilder();
-    builder.testUserData
-      .setFirstName(faker.name.firstName())
-      .setLastName(faker.name.lastName())
-      .setUserName(faker.internet.userName())
-      .setPassword(faker.internet.password());
     return builder;
   }
 
@@ -53,6 +51,16 @@ export default class TestUserDataBuilder {
 
   public withPassword(password: string): this {
     this.testUserData.setPassword(password);
+    return this;
+  }
+
+  public withEmail(email: string): this {
+    this.testUserData.setEmail(email);
+    return this;
+  }
+
+  public withPhoneNumber(phoneNumber: string): this {
+    this.testUserData.setPhoneNumber(phoneNumber);
     return this;
   }
 
