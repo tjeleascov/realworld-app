@@ -15,7 +15,6 @@ test.describe("Bank tests", () => {
     await pages.home.leftSideMenu.clickBankAccounts();
     await pages.bankAccounts.clickCreate();
     await pages.newBankAccount.createNewBankAccount(newBank);
-    await pages.bankAccounts.deleteLastAccountFromTheList();
     await pages.bankAccounts.verifyThatBankAccountIsDisplayed(newBank.getBankName());
   });
 
@@ -25,6 +24,7 @@ test.describe("Bank tests", () => {
     await pages.home.leftSideMenu.clickBankAccounts();
     await pages.bankAccounts.clickCreate();
     await pages.newBankAccount.createNewBankAccount(newBank);
+
     await pages.bankAccounts.deleteLastAccountFromTheList();
     await pages.bankAccounts.verifyThatBankAccountIsDeleted(newBank.getBankName());
     await pages.bankAccounts.verifyThatBankAccountButtonIsHidden();

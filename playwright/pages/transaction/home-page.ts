@@ -1,8 +1,6 @@
 import Button from "@component/common/button";
 import BasePage from "@pages/base-page";
 import { test, Page } from "@playwright/test";
-import TestUserData from "@test-data/data/test-user-data";
-import { User } from "src/models";
 
 export default class HomePage extends BasePage {
   private readonly everyoneButton: Button;
@@ -51,9 +49,4 @@ export default class HomePage extends BasePage {
       await this.firstTransactionButton.isVisible();
     });
   }
-
-  public async verifyTransactionHistoryWithAllDetails(
-    mainUser: TestUserData,
-    secondUser: User
-  ): Promise<void> {}
 }

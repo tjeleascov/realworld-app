@@ -16,20 +16,14 @@ export default class LeftSideMenu extends Component {
   public constructor(page: Page) {
     super(page, page.locator("[data-test='sidenav']"));
 
-    this.homeButton = new Button(page, this.root.locator(this.getByDataTest("sidenav-home")));
-    this.myAccountButton = new Button(
-      page,
-      this.root.locator(this.getByDataTest("sidenav-user-settings"))
-    );
-    this.bankAccountsButton = new Button(
-      page,
-      this.root.locator(this.getByDataTest("sidenav-bankaccounts"))
-    );
+    this.homeButton = new Button(page, page.getByRole("button", { name: "Home" }));
+    this.myAccountButton = new Button(page, page.getByRole("button", { name: "My Account" }));
+    this.bankAccountsButton = new Button(page, page.getByRole("button", { name: "Bank Accounts" }));
     this.notificationsButton = new Button(
       page,
-      this.root.locator(this.getByDataTest("sidenav-notifications"))
+      page.getByRole("button", { name: "Notifications" })
     );
-    this.logoutButton = new Button(page, this.root.locator(this.getByDataTest("sidenav-signout")));
+    this.logoutButton = new Button(page, page.getByRole("button", { name: "Logout" }));
     this.userNameLocator = page.locator(this.getByDataTest("sidenav-username"));
     this.fullNameLocator = page.locator(this.getByDataTest("sidenav-user-full-name"));
     this.userBalanceLocator = page.locator(this.getByDataTest("sidenav-user-balance"));

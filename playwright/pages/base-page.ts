@@ -15,13 +15,6 @@ export default abstract class BasePage {
   public async open(): Promise<void> {
     await test.step(`Open url ${this.url}`, async () => {
       await this.page.goto(this.url, { waitUntil: "load" });
-      await this.page.waitForLoadState("networkidle");
-    });
-  }
-
-  public async reloadPage(): Promise<void> {
-    await test.step(`Reload page`, async () => {
-      await this.page.reload();
     });
   }
 

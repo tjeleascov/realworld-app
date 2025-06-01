@@ -17,20 +17,8 @@ export default class TestUserDataBuilder {
     return builder;
   }
 
-  public static invalidLoginUser(): TestUserDataBuilder {
-    const builder = new TestUserDataBuilder();
-    builder.testUserData.setUserName("nonexistent_user").setPassword("wrong_password");
-    return builder;
-  }
-
   public static newUser(): TestUserDataBuilder {
     const builder = new TestUserDataBuilder();
-    return builder;
-  }
-
-  public static newInvalidSignupUser(): TestUserDataBuilder {
-    const builder = new TestUserDataBuilder();
-    builder.testUserData.setFirstName("").setLastName("").setUserName("x").setPassword("123");
     return builder;
   }
 
