@@ -28,6 +28,7 @@
       "@component/*": ["playwright/components/*"],
       "@test-data/*": ["playwright/test-data/*"],
       "@shared/*": ["playwright/shared/*"],
+      "@services/*": ["playwright/services/*"]
     }
   },
   "include": [

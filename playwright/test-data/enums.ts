@@ -5,6 +5,24 @@ enum TransactionType {
 
 enum Strings {
   DELETED = "(Deleted)",
+  COMMENT = "Very new Comment",
 }
 
-export { TransactionType, Strings };
+enum UrlLinks {
+  API_BASE_URL = "http://localhost:3002",
+}
+
+enum UrlEndpoints {
+  LOGIN = "/login",
+  BANK_ACCOUNTS = "/bankAccounts/",
+  COMMENTS = "/comments/",
+  TRANSACTIONS = "/transactions/",
+  USERS = "/users",
+  USERS_BY_ID = "/users/profile/",
+}
+
+enum ApiLoginType {
+  LOGIN = "LOGIN",
+}
+
+export { TransactionType, Strings, UrlLinks, UrlEndpoints, ApiLoginType };

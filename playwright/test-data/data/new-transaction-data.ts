@@ -22,6 +22,11 @@ export default class NewTransactionData {
         return num.toLocaleString('en-US');
     }
 
+    public getApiAmount(): string {
+        const num = Number(this.amount);
+        return num.toString();
+    }
+
     public setNote(note: string): this {
         this.note = note;
         return this;
@@ -38,5 +43,12 @@ export default class NewTransactionData {
 
     public getTransactionType(): TransactionType {
         return this.transactionType;
+    }
+
+    public getApiTransactionType(): string {
+        return {
+            [TransactionType.REQUEST]: "request",
+            [TransactionType.PAY]: "payment",
+            }[this.transactionType];
     }
 }

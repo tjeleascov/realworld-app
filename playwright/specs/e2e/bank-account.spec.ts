@@ -17,6 +17,14 @@ test.describe("Bank tests", () => {
     await pages.newBankAccount.createNewBankAccount(newBank);
     await pages.bankAccounts.verifyThatBankAccountIsDisplayed(newBank.getBankName());
   });
+});
+
+test.describe("Bank tests with delete option", () => {
+  test.beforeEach(async ({ pages }) => {
+    const validUser = TestUserDataBuilder.existingLoginUser().build();
+    await pages.login.open();
+    await pages.login.loginAsUser(validUser);
+  });
 
   test("Delete a Bank Account", async ({ pages }) => {
     const newBank = new BankAccountData();
@@ -26,7 +34,7 @@ test.describe("Bank tests", () => {
     await pages.newBankAccount.createNewBankAccount(newBank);
 
     await pages.bankAccounts.deleteLastAccountFromTheList();
-    await pages.bankAccounts.verifyThatBankAccountIsDeleted(newBank.getBankName());
     await pages.bankAccounts.verifyThatBankAccountButtonIsHidden();
+    await pages.bankAccounts.verifyThatBankAccountIsDeleted(newBank.getBankName());
   });
 });
