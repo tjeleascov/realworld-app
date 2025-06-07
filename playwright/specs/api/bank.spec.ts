@@ -14,9 +14,9 @@ test.describe("Bank tests", async () => {
     apiContext = await loggedInUserApiContext(testUser);
     bankService = new BankAccountService(apiContext);
 
-    const newBankAccount = new BankAccountData();
-    const createdBank = await bankService.createBankAccount(newBankAccount);
-    bankId = createdBank.id;
+    const bankAccountData = new BankAccountData();
+    const newBankBody = await bankService.createBankAccount(bankAccountData);
+    bankId = newBankBody.id;
   });
 
   test.afterAll(async () => {

@@ -19,11 +19,16 @@ test.describe("Transaction tests", async () => {
     apiContext = await loggedInUserApiContext(testUser);
     transactionService = new TransactionService(apiContext);
     userService = new UserService(apiContext);
-    let newTrasnsaction = new NewTransactionData(TransactionType.PAY);
-    let recievedUser = await userService.getUsers();
-    recieverId = recievedUser.results[0].id;
 
-    let newTransaction = await transactionService.createTransaction(newTrasnsaction, recieverId);
+    let newTrasnsactionData = new NewTransactionData(TransactionType.PAY);
+    let recievedUserBody = await userService.getUsers();
+    recieverId = recievedUserBody.results[0].id;
+
+    let newTransaction = await transactionService.createTransaction(
+      newTrasnsactionData,
+      recieverId
+    );
+
     transactionId = newTransaction.transaction.id;
   });
 
@@ -32,14 +37,14 @@ test.describe("Transaction tests", async () => {
   });
 
   test("Create a comment for transaction", async () => {
-    const commentResponse = await transactionService.createACommentForTransaction(
+    const commentBody = await transactionService.createACommentForTransaction(
       transactionId,
       Strings.COMMENT
     );
 
-    expect(commentResponse).toBe("OK");
+    expect(commentBody).toBe("OK");
 
-    let allComments = await transactionService.getAllCommentsForTransaction(transactionId);
-    expect(allComments.comments[0].content).toBe(Strings.COMMENT);
+    let allCommentsBody = await transactionService.getAllCommentsForTransaction(transactionId);
+    expect(allCommentsBody.comments[0].content).toBe(Strings.COMMENT);
   });
 });

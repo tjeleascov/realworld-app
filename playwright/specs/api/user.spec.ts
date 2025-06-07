@@ -18,21 +18,20 @@ test.describe("User tests", async () => {
   });
 
   test("Get list of users", async () => {
-    let responseUsers = await userService.getUsers();
-    console.log(responseUsers);
+    let userBody = await userService.getUsers();
 
-    expect(responseUsers).toHaveProperty("results");
-    for (const user of responseUsers.results) {
+    expect(userBody).toHaveProperty("results");
+    for (const user of userBody.results) {
       expect(user).toHaveProperty("username");
       expect(user).toHaveProperty("password");
     }
   });
 
   test("Get a user profile by username", async () => {
-    const usersResponse = await userService.getUsers();
-    const username = usersResponse.results[0].username;
-    const firstName = usersResponse.results[0].firstName;
-    const lastName = usersResponse.results[0].lastName;
+    const userBody = await userService.getUsers();
+    const username = userBody.results[0].username;
+    const firstName = userBody.results[0].firstName;
+    const lastName = userBody.results[0].lastName;
 
     const usersProfileResponse = await userService.getUserByUsername(username);
     expect(usersProfileResponse.user.firstName).toEqual(firstName);
