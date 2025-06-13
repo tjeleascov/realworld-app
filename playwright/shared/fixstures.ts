@@ -1,5 +1,5 @@
 import { test as base } from "@playwright/test";
-import Pages from "@pages/pages";
+import Pages from "@playwright-pages/pages";
 
 type MyFixtures = {
   pages: Pages;

@@ -1,6 +1,6 @@
-import Button from "@component/common/button";
-import Input from "@component/common/input";
-import BasePage from "@pages/base-page";
+import Button from "@playwright-component/common/button";
+import Input from "@playwright-component/common/input";
+import BasePage from "@playwright-pages/base-page";
 import test, { Page } from "@playwright/test";
 import BankAccountData from "@test-data/data/bank-account-data";
 

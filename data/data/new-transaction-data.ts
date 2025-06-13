@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { TransactionType } from "@test-data/enums";
+import { TransactionType } from "data/enums";
 
 export default class NewTransactionData {
     private amount!: string;

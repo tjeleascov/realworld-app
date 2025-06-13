@@ -1,5 +1,5 @@
-import { test } from "@shared/fixstures";
-import TestUserDataBuilder from "@test-data/builder/test-user-builder";
+import { test } from "@playwright-shared/fixstures";
+import TestUserDataBuilder from "data/builder/test-user-builder";
 
 test.describe("Authorize tests", () => {
   test("Login with valid existing user", async ({ pages }) => {

@@ -1,7 +1,7 @@
 import { test, expect, APIRequestContext } from "@playwright/test";
-import { UserService } from "@services/user-service-api";
-import { loggedInUserApiContext } from "@shared/apiUtilities";
-import TestUserDataBuilder from "@test-data/builder/test-user-builder";
+import { UserService } from "@playwright-services/user-service-api";
+import { loggedInUserApiContext } from "@playwright-shared/apiUtilities";
+import TestUserDataBuilder from "data/builder/test-user-builder";
 
 test.describe("User tests", async () => {
   let apiContext: APIRequestContext;

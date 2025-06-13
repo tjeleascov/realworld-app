@@ -1,5 +1,5 @@
-import Button from "@component/common/button";
-import Component from "@component/common/component";
+import Button from "@playwright-component/common/button";
+import Component from "@playwright-component/common/component";
 import { test, expect, Locator, Page } from "@playwright/test";
 import TestUserData from "@test-data/data/test-user-data";
 

@@ -1,11 +1,11 @@
 import { test, expect, APIRequestContext } from "@playwright/test";
-import { TransactionService } from "@services/transaction-service-api";
-import { UserService } from "@services/user-service-api";
-import { loggedInUserApiContext } from "@shared/apiUtilities";
-import TestUserDataBuilder from "@test-data/builder/test-user-builder";
-import NewTransactionData from "@test-data/data/new-transaction-data";
-import { TransactionType } from "@test-data/enums";
-import { Strings } from "@test-data/enums";
+import { TransactionService } from "@playwright-services/transaction-service-api";
+import { UserService } from "@playwright-services/user-service-api";
+import { loggedInUserApiContext } from "@playwright-shared/apiUtilities";
+import TestUserDataBuilder from "data/builder/test-user-builder";
+import NewTransactionData from "data/data/new-transaction-data";
+import { TransactionType } from "data/enums";
+import { Strings } from "data/enums";
 
 test.describe("Transaction tests", async () => {
   let apiContext: APIRequestContext;

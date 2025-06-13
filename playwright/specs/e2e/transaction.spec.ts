@@ -1,8 +1,8 @@
 import faker from "@faker-js/faker";
-import { test } from "@shared/fixstures";
-import TestUserDataBuilder from "@test-data/builder/test-user-builder";
-import NewTransactionData from "@test-data/data/new-transaction-data";
-import { TransactionType } from "@test-data/enums";
+import { test } from "@playwright-shared/fixstures";
+import TestUserDataBuilder from "data/builder/test-user-builder";
+import NewTransactionData from "data/data/new-transaction-data";
+import { TransactionType } from "data/enums";
 
 test.describe("Transaction creation tests", () => {
   const validUser = TestUserDataBuilder.existingLoginUser().build();
@@ -49,7 +49,6 @@ test.describe("Transaction creation tests", () => {
 });
 
 test.describe("Transaction details tests", () => {
-  const COMMENT_TRANSACTION = faker.random.word();
   test.beforeEach(async ({ pages }) => {
     const validUser = TestUserDataBuilder.existingLoginUser().build();
     await pages.login.open();
@@ -70,6 +69,7 @@ test.describe("Transaction details tests", () => {
   });
 
   test("Verify the 'Comment' functionality", async ({ pages }) => {
+    const COMMENT_TRANSACTION = faker.random.word();
     await pages.transactionDetail.sendComment(COMMENT_TRANSACTION);
     await pages.transactionDetail.verifyCommentEqualsTo(COMMENT_TRANSACTION);
   });

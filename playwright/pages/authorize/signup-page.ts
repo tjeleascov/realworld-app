@@ -1,8 +1,8 @@
 import { test, Page } from "playwright/test";
 
-import Button from "@component/common/button";
-import Input from "@component/common/input";
-import BasePage from "@pages/base-page";
+import Button from "@playwright-component/common/button";
+import Input from "@playwright-component/common/input";
+import BasePage from "@playwright-pages/base-page";
 import TestUserData from "@test-data/data/test-user-data";
 
 export default class SignupPage extends BasePage {

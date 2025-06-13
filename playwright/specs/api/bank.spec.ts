@@ -1,6 +1,6 @@
 import { test, expect, APIRequestContext } from "@playwright/test";
-import { BankAccountService } from "@services/bank-service-api";
-import { loggedInUserApiContext } from "@shared/apiUtilities";
+import { BankAccountService } from "@playwright-services/bank-service-api";
+import { loggedInUserApiContext } from "@playwright-shared/apiUtilities";
 import TestUserDataBuilder from "@test-data/builder/test-user-builder";
 import BankAccountData from "@test-data/data/bank-account-data";
 
@@ -16,7 +16,7 @@ test.describe("Bank tests", async () => {
 
     const bankAccountData = new BankAccountData();
     const newBankBody = await bankService.createBankAccount(bankAccountData);
-    bankId = newBankBody.id;
+    bankId = newBankBody.account.id;
   });
 
   test.afterAll(async () => {
@@ -38,9 +38,8 @@ test.describe("Bank tests", async () => {
 
     expect(Object.keys(bankDeleteBody).length).toBe(0);
 
-    const banksBody = await bankService.getBankAccounts();
-    for (const bank of banksBody.results) {
-      expect(bankId).not.toBe(bank.id);
-    }
+    const bankBody = await bankService.getBankAccountById(bankId);
+
+    expect(bankBody.account.isDeleted).toBe(true);
   });
 });

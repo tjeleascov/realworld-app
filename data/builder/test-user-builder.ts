@@ -1,4 +1,4 @@
-import TestUserData from "@test-data/data/test-user-data";
+import TestUserData from "data/data/test-user-data";
 
 export default class TestUserDataBuilder {
   private testUserData: TestUserData;

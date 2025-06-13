@@ -1,13 +1,13 @@
 import type { Page } from "@playwright/test";
 
-import LoginPage from "@pages/authorize/login-page";
-import SignupPage from "@pages/authorize/signup-page";
-import HomePage from "@pages/transaction/home-page";
-import TransactionDetailPage from "@pages/transaction/transaction-detail-page";
-import NewTransactionPage from "@pages/transaction/new-transaction-page";
-import MyAccountPage from "@pages/account/my-account-page";
-import BankAccountsPage from "@pages/bank-account/bank-accounts-page";
-import NewBankAccountPage from "@pages/bank-account/new-bank-account-page";
+import LoginPage from "@playwright-pages/authorize/login-page";
+import SignupPage from "@playwright-pages/authorize/signup-page";
+import HomePage from "@playwright-pages/transaction/home-page";
+import TransactionDetailPage from "@playwright-pages/transaction/transaction-detail-page";
+import NewTransactionPage from "@playwright-pages/transaction/new-transaction-page";
+import MyAccountPage from "@playwright-pages/account/my-account-page";
+import BankAccountsPage from "@playwright-pages/bank-account/bank-accounts-page";
+import NewBankAccountPage from "@playwright-pages/bank-account/new-bank-account-page";
 
 export default class Pages {
   public login: LoginPage;

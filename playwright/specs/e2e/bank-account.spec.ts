@@ -1,6 +1,6 @@
-import { test } from "@shared/fixstures";
-import TestUserDataBuilder from "@test-data/builder/test-user-builder";
-import BankAccountData from "@test-data/data/bank-account-data";
+import { test } from "@playwright-shared/fixstures";
+import TestUserDataBuilder from "data/builder/test-user-builder";
+import BankAccountData from "data/data/bank-account-data";
 
 test.describe("Bank tests", () => {
   test.beforeEach(async ({ pages }) => {

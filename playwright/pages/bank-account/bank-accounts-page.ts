@@ -1,5 +1,5 @@
-import Button from "@component/common/button";
-import BasePage from "@pages/base-page";
+import Button from "@playwright-component/common/button";
+import BasePage from "@playwright-pages/base-page";
 import test, { expect, Locator, Page } from "@playwright/test";
 import { Strings } from "@test-data/enums";
 

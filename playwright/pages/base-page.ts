@@ -1,5 +1,5 @@
-import LeftSideMenu from "@component/menu/left-side-menu";
-import TopSideMenu from "@component/menu/top-side-menu";
+import LeftSideMenu from "@playwright-component/menu/left-side-menu";
+import TopSideMenu from "@playwright-component/menu/top-side-menu";
 import { test, expect, Page } from "@playwright/test";
 
 export default abstract class BasePage {

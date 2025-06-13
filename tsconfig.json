@@ -24,12 +24,13 @@
       "cypress"
     ],
     "paths": {
-      "@pages/*": ["playwright/pages/*"],
-      "@component/*": ["playwright/components/*"],
-      "@test-data/*": ["playwright/test-data/*"],
-      "@shared/*": ["playwright/shared/*"],
-      "@services/*": ["playwright/services/*"]
-    }
+      "@playwright-pages/*": ["playwright/pages/*"],
+      "@playwright-component/*": ["playwright/components/*"],
+      "@test-data/*": ["data/*"],
+      "@playwright-shared/*": ["playwright/shared/*"],
+      "@playwright-services/*": ["playwright/services/*"],
+      "@cypress-pages/*": ["cypress/pages/*"],
+    },
   },
   "include": [
     "src/**/*.cy.{js,ts,jsx,tsx}",
@@ -38,5 +39,5 @@
     "src/__tests__",
     "cypress/support/component.ts",
     "**/*.ts"
-  ]
+  ],
 }

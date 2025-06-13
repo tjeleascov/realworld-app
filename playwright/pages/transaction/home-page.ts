@@ -1,5 +1,5 @@
-import Button from "@component/common/button";
-import BasePage from "@pages/base-page";
+import Button from "@playwright-component/common/button";
+import BasePage from "@playwright-pages/base-page";
 import { test, Page } from "@playwright/test";
 
 export default class HomePage extends BasePage {
@@ -11,7 +11,7 @@ export default class HomePage extends BasePage {
   public constructor(page: Page) {
     super(page);
 
-    this.everyoneButton = new Button(page, page.locator(this.getByDataTest("nav-public-tb")));
+    this.everyoneButton = new Button(page, page.locator(this.getByDataTest("nav-public-tab")));
     this.friendsButton = new Button(page, page.locator(this.getByDataTest("nav-contacts-tab")));
     this.mineButton = new Button(page, page.locator(this.getByDataTest("nav-personal-tab")));
     this.firstTransactionButton = new Button(

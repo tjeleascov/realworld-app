@@ -21,6 +21,11 @@ export class BankAccountService {
     return response.json();
   }
 
+  public async getBankAccountById(id: string) {
+    const response = await this.apiContext.get(UrlEndpoints.BANK_ACCOUNTS + id);
+    return response.json();
+  }
+
   public async deleteBankAccount(id: string) {
     const response = await this.apiContext.delete(`${UrlEndpoints.BANK_ACCOUNTS}${id}`);
     return response.json();

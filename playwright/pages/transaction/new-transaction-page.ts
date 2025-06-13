@@ -1,6 +1,6 @@
-import Button from "@component/common/button";
-import Input from "@component/common/input";
-import BasePage from "@pages/base-page";
+import Button from "@playwright-component/common/button";
+import Input from "@playwright-component/common/input";
+import BasePage from "@playwright-pages/base-page";
 import { expect, test, Page, Locator } from "@playwright/test";
 import NewTransactionData from "@test-data/data/new-transaction-data";
 import { TransactionType } from "@test-data/enums";
