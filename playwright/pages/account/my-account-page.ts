@@ -32,24 +32,33 @@ export default class MyAccountPage extends BasePage {
       }
     );
   }
-
   public async fillFirstName(firstName: string): Promise<void> {
-    await this.firstNameInput.clearAndFill(firstName);
+    await test.step(`Fill in first name: ${firstName}`, async () => {
+      await this.firstNameInput.clearAndFill(firstName);
+    });
   }
 
   public async fillLastName(lastName: string): Promise<void> {
-    await this.lastNameInput.clearAndFill(lastName);
+    await test.step(`Fill in last name: ${lastName}`, async () => {
+      await this.lastNameInput.clearAndFill(lastName);
+    });
   }
 
   public async fillEmail(email: string): Promise<void> {
-    await this.emailInput.clearAndFill(email);
+    await test.step(`Fill in email: ${email}`, async () => {
+      await this.emailInput.clearAndFill(email);
+    });
   }
 
   public async fillPhone(phone: string): Promise<void> {
-    await this.phoneInput.clearAndFill(phone);
+    await test.step(`Fill in phone: ${phone}`, async () => {
+      await this.phoneInput.clearAndFill(phone);
+    });
   }
 
   public async clickSave(): Promise<void> {
-    await this.saveButton.click();
+    await test.step("Click save button", async () => {
+      await this.saveButton.click();
+    });
   }
 }

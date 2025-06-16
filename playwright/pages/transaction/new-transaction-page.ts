@@ -37,15 +37,40 @@ export default class NewTransactionPage extends BasePage {
     await test.step(
       `Create a New ${newTransaction.getTransactionType()} transaction and submit`,
       async () => {
-        await this.amountInput.clearAndFill(newTransaction.getAmount());
-        await this.addNoteInput.clearAndFill(newTransaction.getNote());
+        await this.fillAmount(newTransaction.getAmount());
+        await this.fillNote(newTransaction.getNote());
+
         if (newTransaction.getTransactionType() === TransactionType.PAY) {
-          await this.payButton.click();
+          await this.clickPayButton();
         } else {
-          await this.requestButton.click();
+          await this.clickRequestButton();
         }
       }
     );
+  }
+
+  public async fillAmount(amount: string): Promise<void> {
+    await test.step(`Fill in amount: ${amount}`, async () => {
+      await this.amountInput.clearAndFill(amount);
+    });
+  }
+
+  public async fillNote(note: string): Promise<void> {
+    await test.step(`Fill in note: ${note}`, async () => {
+      await this.addNoteInput.clearAndFill(note);
+    });
+  }
+
+  public async clickPayButton(): Promise<void> {
+    await test.step("Click pay button", async () => {
+      await this.payButton.click();
+    });
+  }
+
+  public async clickRequestButton(): Promise<void> {
+    await test.step("Click request button", async () => {
+      await this.requestButton.click();
+    });
   }
 
   public async clickOnTheFirstTransactionContact(): Promise<void> {

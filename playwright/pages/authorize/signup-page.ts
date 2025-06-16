@@ -1,4 +1,4 @@
-import { test, Page } from "playwright/test";
+import { test, Page } from "@playwright/test";
 
 import Button from "@playwright-component/common/button";
 import Input from "@playwright-component/common/input";
@@ -32,16 +32,49 @@ export default class SignupPage extends BasePage {
   }
 
   public async signUpAsUser(newUser: TestUserData): Promise<void> {
-    await test.step(
-      `Sign-up into the application as a new user: ${JSON.stringify(newUser)}`,
-      async () => {
-        await this.firstNameInput.clearAndFill(newUser.getFirstName());
-        await this.lastNameInput.clearAndFill(newUser.getLastName());
-        await this.usernameInput.clearAndFill(newUser.getUserName());
-        await this.passwordInput.clearAndFill(newUser.getPassword());
-        await this.confirmPasswordInput.clearAndFill(newUser.getPassword());
-        await this.signupButton.click();
-      }
-    );
+    await test.step(`Sign up as new user: ${newUser.getUserName()}`, async () => {
+      await this.fillFirstName(newUser.getFirstName());
+      await this.fillLastName(newUser.getLastName());
+      await this.fillUsername(newUser.getUserName());
+      await this.fillPassword(newUser.getPassword());
+      await this.fillConfirmPassword(newUser.getPassword());
+      await this.clickSignup();
+    });
+  }
+
+  public async fillFirstName(firstName: string): Promise<void> {
+    await test.step(`Fill in first name: ${firstName}`, async () => {
+      await this.firstNameInput.clearAndFill(firstName);
+    });
+  }
+
+  public async fillLastName(lastName: string): Promise<void> {
+    await test.step(`Fill in last name: ${lastName}`, async () => {
+      await this.lastNameInput.clearAndFill(lastName);
+    });
+  }
+
+  public async fillUsername(username: string): Promise<void> {
+    await test.step(`Fill in username: ${username}`, async () => {
+      await this.usernameInput.clearAndFill(username);
+    });
+  }
+
+  public async fillPassword(password: string): Promise<void> {
+    await test.step(`Fill in password`, async () => {
+      await this.passwordInput.clearAndFill(password);
+    });
+  }
+
+  public async fillConfirmPassword(password: string): Promise<void> {
+    await test.step(`Fill in confirm password`, async () => {
+      await this.confirmPasswordInput.clearAndFill(password);
+    });
+  }
+
+  public async clickSignup(): Promise<void> {
+    await test.step("Click signup button", async () => {
+      await this.signupButton.click();
+    });
   }
 }

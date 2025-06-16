@@ -35,15 +35,21 @@ export default class LoginPage extends BasePage {
   }
 
   public async fillUsername(username: string): Promise<void> {
-    await this.usernameInput.clearAndFill(username);
+    await test.step(`Fill in username: ${username}`, async () => {
+      await this.usernameInput.clearAndFill(username);
+    });
   }
 
   public async fillPassword(password: string): Promise<void> {
-    await this.passwordInput.clearAndFill(password);
+    await test.step(`Fill in password`, async () => {
+      await this.passwordInput.clearAndFill(password);
+    });
   }
 
   public async clickLogin(): Promise<void> {
-    await this.loginButton.click();
+    await test.step("Click login button", async () => {
+      await this.loginButton.click();
+    });
   }
 
   public async clickSignUp(): Promise<void> {

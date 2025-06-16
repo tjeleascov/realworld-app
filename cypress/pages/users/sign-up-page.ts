@@ -1,36 +1,60 @@
 import TestUserData from "@test-data/data/test-user-data";
 
 export default class SignupPage {
-  get firstNameInput() {
+  private get firstNameInput() {
     return cy.getById("firstName");
   }
 
-  get lastNameInput() {
+  private get lastNameInput() {
     return cy.getById("lastName");
   }
 
-  get usernameInput() {
+  private get usernameInput() {
     return cy.getById("username");
   }
 
-  get passwordInput() {
+  private get passwordInput() {
     return cy.getById("password");
   }
 
-  get confirmPasswordInput() {
+  private get confirmPasswordInput() {
     return cy.getById("confirmPassword");
   }
 
-  get signUpButton() {
+  private get signUpButton() {
     return cy.getBySel("signup-submit");
   }
 
   signUpAsUser(newUser: TestUserData) {
-    this.firstNameInput.type(newUser.getFirstName());
-    this.lastNameInput.type(newUser.getLastName());
-    this.usernameInput.type(newUser.getUserName());
-    this.passwordInput.type(newUser.getPassword());
-    this.confirmPasswordInput.type(newUser.getPassword());
+    this.fillFirstName(newUser.getFirstName());
+    this.fillLastName(newUser.getLastName());
+    this.fillUsername(newUser.getUserName());
+    this.fillPassword(newUser.getPassword());
+    this.fillConfirmPassword(newUser.getPassword());
+    this.clickSignUpButton();
+  }
+
+  fillFirstName(firstName: string) {
+    this.firstNameInput.clear().type(firstName);
+  }
+
+  fillLastName(lastName: string) {
+    this.lastNameInput.clear().type(lastName);
+  }
+
+  fillUsername(username: string) {
+    this.usernameInput.clear().type(username);
+  }
+
+  fillPassword(password: string) {
+    this.passwordInput.clear().type(password);
+  }
+
+  fillConfirmPassword(password: string) {
+    this.confirmPasswordInput.clear().type(password);
+  }
+
+  clickSignUpButton() {
     this.signUpButton.click();
   }
 }

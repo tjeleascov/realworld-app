@@ -2,39 +2,39 @@ import { TransactionType } from "@test-data/enums";
 import NewTransactionData from "@test-data/data/new-transaction-data";
 
 export default class TransactionDetailPage {
-  get transactionSender() {
+  private get transactionSender() {
     return cy.get('span[data-test^="transaction-sender"]');
   }
 
-  get transactionAction() {
+  private get transactionAction() {
     return cy.getBySelLike("transaction-action");
   }
 
-  get transactionReceiver() {
+  private get transactionReceiver() {
     return cy.get('span[data-test^="transaction-receiver"]');
   }
 
-  get transactionNote() {
+  private get transactionNote() {
     return cy.getBySel("transaction-description");
   }
 
-  get transactionAmount() {
+  private get transactionAmount() {
     return cy.getBySelLike("transaction-amount");
   }
 
-  get likeButton() {
+  private get likeButton() {
     return cy.getBySelLike("transaction-like-button");
   }
 
-  get likeAmount() {
+  private get likeAmount() {
     return cy.getBySelLike("transaction-like-count");
   }
 
-  get commentInput() {
+  private get commentInput() {
     return cy.getBySelLike("transaction-comment-input");
   }
 
-  get comments() {
+  private get comments() {
     return cy.getBySelLike("comment-list-item");
   }
 
@@ -42,7 +42,7 @@ export default class TransactionDetailPage {
     this.likeButton.click();
   }
 
-  sendComment(comment: string) {
+  fillComment(comment: string) {
     this.commentInput.clear().type(comment).type("{enter}");
   }
 

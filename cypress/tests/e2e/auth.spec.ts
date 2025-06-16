@@ -6,7 +6,7 @@ describe("Authorize spec", () => {
     cy.visit("/");
   });
 
-  it("should log in", function () {
+  it("Login with valid existing user", function () {
     let loginUser = TestUserDataBuilder.existingLoginUser().build();
 
     pages.login.loginAsUser(loginUser);
@@ -15,9 +15,9 @@ describe("Authorize spec", () => {
     pages.leftSideMenu.verifyUserBalanceIsVisbile();
   });
 
-  it("should sign up", function () {
+  it("Signup with new valid user", function () {
     let newUser = TestUserDataBuilder.newUser().build();
-    pages.login.signUpButton.click();
+    pages.login.clickSignUp();
 
     pages.signup.signUpAsUser(newUser);
     pages.login.loginAsUser(newUser);

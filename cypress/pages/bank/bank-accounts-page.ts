@@ -1,15 +1,15 @@
 import { Strings } from "@test-data/enums";
 
 export default class BankAccountsPage {
-  get createButton() {
+  private get createButton() {
     return cy.getBySel("bankaccount-new");
   }
 
-  get lastBankAccountLocator() {
+  private get lastBankAccountLocator() {
     return cy.getBySelLike("bankaccount-list-item").last().find("p");
   }
 
-  get lastDeleteBankAccountButton() {
+  private get lastDeleteBankAccountButton() {
     return cy.getBySelLike("bankaccount-list-item").last().find("button");
   }
 

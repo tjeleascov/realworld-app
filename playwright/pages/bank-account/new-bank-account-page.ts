@@ -28,18 +28,26 @@ export default class NewBankAccountPage extends BasePage {
   }
 
   public async fillBankName(name: string): Promise<void> {
-    await this.bankNameInput.clearAndFill(name);
+    await test.step(`Fill in bank name: ${name}`, async () => {
+      await this.bankNameInput.clearAndFill(name);
+    });
   }
 
   public async fillRoutingNumber(routingNumber: string): Promise<void> {
-    await this.routingNumberInput.clearAndFill(routingNumber);
+    await test.step(`Fill in routing number: ${routingNumber}`, async () => {
+      await this.routingNumberInput.clearAndFill(routingNumber);
+    });
   }
 
   public async fillAccountNumber(accountNumber: string): Promise<void> {
-    await this.accountNumberInput.clearAndFill(accountNumber);
+    await test.step(`Fill in account number: ${accountNumber}`, async () => {
+      await this.accountNumberInput.clearAndFill(accountNumber);
+    });
   }
 
   public async clickSaveBankAccount(): Promise<void> {
-    await this.saveButton.click();
+    await test.step("Click save bank account button", async () => {
+      await this.saveButton.click();
+    });
   }
 }

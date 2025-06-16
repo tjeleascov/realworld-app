@@ -1,35 +1,35 @@
 import TestUserData from "@test-data/data/test-user-data";
 
 export default class LeftSideMenu {
-  get homeButton() {
+  private get homeButton() {
     return cy.getBySel("sidenav-home");
   }
 
-  get myAccountButton() {
+  private get myAccountButton() {
     return cy.getBySel("sidenav-user-settings");
   }
 
-  get bankAccountsButton() {
+  private get bankAccountsButton() {
     return cy.getBySel("sidenav-bankaccounts");
   }
 
-  get notificationsButton() {
+  private get notificationsButton() {
     return cy.getBySel("sidenav-notifications");
   }
 
-  get logoutButton() {
+  private get logoutButton() {
     return cy.getBySel("sidenav-signout");
   }
 
-  get fullnameLocator() {
+  private get fullnameLocator() {
     return cy.getBySel("sidenav-user-full-name");
   }
 
-  get usernameLocator() {
+  private get usernameLocator() {
     return cy.getBySel("sidenav-username");
   }
 
-  get balanceLocator() {
+  private get balanceLocator() {
     return cy.getBySel("sidenav-user-balance");
   }
 

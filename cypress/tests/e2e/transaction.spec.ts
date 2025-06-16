@@ -73,7 +73,7 @@ describe("Transaction details tests", () => {
 
   it("Verify the 'Comment' functionality", function () {
     const COMMENT_TRANSACTION = faker.random.word();
-    pages.transactionDetail.sendComment(COMMENT_TRANSACTION);
+    pages.transactionDetail.fillComment(COMMENT_TRANSACTION);
     pages.transactionDetail.verifyCommentEqualsTo(COMMENT_TRANSACTION);
   });
 });

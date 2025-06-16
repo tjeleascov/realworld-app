@@ -1,24 +1,32 @@
 import TestUserData from "@test-data/data/test-user-data";
 
 export default class MyAccountPage {
-  get firstNameInput() {
+  private get firstNameInput() {
     return cy.getBySel("user-settings-firstName-input");
   }
 
-  get lastNameInput() {
+  private get lastNameInput() {
     return cy.getBySel("user-settings-lastName-input");
   }
 
-  get emailInput() {
+  private get emailInput() {
     return cy.getBySel("user-settings-email-input");
   }
 
-  get phoneInput() {
+  private get phoneInput() {
     return cy.getBySel("user-settings-phoneNumber-input");
   }
 
-  get saveButton() {
+  private get saveButton() {
     return cy.getBySel("user-settings-submit");
+  }
+
+  updateUserDataAndSaveChanges(updatedUser: TestUserData) {
+    this.fillFirstName(updatedUser.getFirstName());
+    this.fillLastName(updatedUser.getLastName());
+    this.fillEmail(updatedUser.getEmail());
+    this.fillPhone(updatedUser.getPhoneNumber());
+    this.clickSave();
   }
 
   fillFirstName(firstName: string) {
@@ -39,15 +47,5 @@ export default class MyAccountPage {
 
   clickSave() {
     this.saveButton.click();
-  }
-
-  updateUserDataAndSaveChanges(updatedUser: TestUserData) {
-    cy.log(`Update the user information with: ${JSON.stringify(updatedUser)}`);
-
-    this.fillFirstName(updatedUser.getFirstName());
-    this.fillLastName(updatedUser.getLastName());
-    this.fillEmail(updatedUser.getEmail());
-    this.fillPhone(updatedUser.getPhoneNumber());
-    this.clickSave();
   }
 }

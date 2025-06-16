@@ -2,42 +2,67 @@ import NewTransactionData from "@test-data/data/new-transaction-data";
 import { TransactionType } from "@test-data/enums";
 
 export default class NewTransactionPage {
-  get firstTransactionContactButton() {
+  private get firstTransactionContactButton() {
     return cy.getBySelLike("user-list-item").first();
   }
 
-  get requestButton() {
+  private get requestButton() {
     return cy.getBySel("transaction-create-submit-request");
   }
 
-  get payButton() {
+  private get payButton() {
     return cy.getBySel("transaction-create-submit-payment");
   }
 
-  get returnToTransactionButton() {
+  private get returnToTransactionButton() {
     return cy.getBySel("new-transaction-return-to-transactions");
   }
 
-  get amountInput() {
+  private get amountInput() {
     return cy.getById("amount");
   }
 
-  get addNoteInput() {
+  private get addNoteInput() {
     return cy.getById("transaction-create-description-input");
   }
 
-  get successTransactionLocator() {
+  private get successTransactionLocator() {
     return cy.contains("Transaction Submitted!");
   }
 
   makeNewTransactionWithFirstContactAndSubmit(newTransaction: NewTransactionData) {
-    this.amountInput.clear().type(newTransaction.getAmount());
-    this.addNoteInput.clear().type(newTransaction.getNote());
+    this.fillAmount(newTransaction.getAmount());
+    this.fillNote(newTransaction.getNote());
+
     if (newTransaction.getTransactionType() === TransactionType.PAY) {
-      this.payButton.click();
+      this.clickPayButton();
     } else {
-      this.requestButton.click();
+      this.clickRequestButton();
     }
+  }
+
+  fillAmount(amount: string) {
+    this.amountInput.clear().type(amount);
+  }
+
+  fillNote(note: string) {
+    this.addNoteInput.clear().type(note);
+  }
+
+  clickFirstContact() {
+    this.firstTransactionContactButton.click();
+  }
+
+  clickPayButton() {
+    this.payButton.click();
+  }
+
+  clickRequestButton() {
+    this.requestButton.click();
+  }
+
+  clickReturnToTransactions() {
+    this.returnToTransactionButton.click();
   }
 
   clickOnTheFirstTransactionContact() {

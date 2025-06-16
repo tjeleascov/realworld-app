@@ -1,25 +1,41 @@
 import TestUserData from "@test-data/data/test-user-data";
 
 export default class LoginPage {
-  get usernameInput() {
+  private get usernameInput() {
     return cy.getBySel("signin-username");
   }
 
-  get passwordInput() {
+  private get passwordInput() {
     return cy.getBySel("signin-password");
   }
 
-  get loginButton() {
+  private get loginButton() {
     return cy.getBySel("signin-submit");
   }
 
-  get signUpButton() {
+  private get signUpButton() {
     return cy.contains("Don't have an account? Sign Up");
   }
 
   loginAsUser(user: TestUserData) {
-    this.usernameInput.clear().type(user.getUserName());
-    this.passwordInput.clear().type(user.getPassword());
+    this.fillUsername(user.getUserName());
+    this.fillPassword(user.getPassword());
+    this.clickLogin();
+  }
+
+  fillUsername(username: string) {
+    this.usernameInput.clear().type(username);
+  }
+
+  fillPassword(password: string) {
+    this.passwordInput.clear().type(password);
+  }
+
+  clickLogin() {
     this.loginButton.click();
+  }
+
+  clickSignUp() {
+    this.signUpButton.click();
   }
 }

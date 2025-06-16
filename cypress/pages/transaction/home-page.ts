@@ -1,17 +1,17 @@
 export default class HomePage {
-  get everyoneButton() {
+  private get everyoneButton() {
     return cy.getBySel("nav-public-tab");
   }
 
-  get friendsButton() {
+  private get friendsButton() {
     return cy.getBySel("nav-contacts-tab");
   }
 
-  get mineButton() {
+  private get mineButton() {
     return cy.getBySel("nav-personal-tab");
   }
 
-  get firstTransactionButton() {
+  private get firstTransactionButton() {
     return cy.getBySelLike("transaction-item").first();
   }
 

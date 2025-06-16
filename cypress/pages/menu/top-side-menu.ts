@@ -1,8 +1,8 @@
 export default class TopSideMenu {
-  get newTransactionButton() {
+  private get newTransactionButton() {
     return cy.getBySel("nav-top-new-transaction");
   }
-  get notificcationsButton() {
+  private get notificcationsButton() {
     return cy.getBySel("nav-top-new-transaction");
   }
 
