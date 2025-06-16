@@ -5,12 +5,16 @@ export default class TestUserData {
     private lastName!: string;
     private password!: string;
     private userName!: string;
+    private email!: string;
+    private phoneNumber!: string;
 
     public constructor () {
         this.setFirstName(faker.name.firstName());
         this.setLastName(faker.name.lastName());
         this.setPassword(faker.internet.password());
         this.setUserName(faker.internet.userName());
+        this.setEmail(faker.internet.email());
+        this.setPhoneNumber(faker.phone.phoneNumberFormat());
     }
 
     public setFirstName(firstName: string): this {
@@ -47,5 +51,23 @@ export default class TestUserData {
 
     public getUserName(): string {
         return this.userName;
+    }
+    
+    public setEmail(email: string): this {
+        this.email = email;
+        return this;
+    }
+
+    public getEmail(): string {
+        return this.email;
+    }
+
+    public setPhoneNumber(phoneNumber: string): this {
+        this.phoneNumber = phoneNumber;
+        return this;
+    }
+
+    public getPhoneNumber(): string {
+        return this.phoneNumber;
     }
 }

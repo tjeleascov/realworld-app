@@ -1,4 +1,4 @@
-import Component from "@component/common/component";
+import Component from "@playwright-component/common/component";
 
 export default class Input extends Component {
   public async clearAndFill(text: string | number): Promise<void> {
