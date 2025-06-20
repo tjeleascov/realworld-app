@@ -1,20 +1,24 @@
 pipeline {
   agent any
 
-  stages {
-    stage('Start local server') {
-      steps {
-        sh 'yarn start'
+  stage('Start local server') {
+    steps {
+      script {
+        def serverImage = docker.build("my-server", "-f Dockerfile.server .")
 
-        sh '''
-          until nc -z localhost 3000; do
-            echo "Waiting for server..."
-            sleep 2
-          done
-        '''
+        serverImage.withRun('-p 3000:3000') { c ->
+          // Ждём, пока сервер поднимется
+          sh '''
+            echo "Waiting for server to start..."
+            until nc -z localhost 3000; do
+              echo "Still waiting for server..."
+              sleep 2
+            done
+          '''
+        }
       }
     }
-
+  }
 
     stage('Run Cypress Tests in Docker') {
       steps {
@@ -39,5 +43,5 @@ pipeline {
         }
       }
     }
-  }
 }
+
