@@ -1,0 +1,9 @@
+FROM cypress/included:10.11.0
+
+WORKDIR /app
+
+COPY ./cypress/tests/ ./
+
+RUN npm install
+
+CMD ["npx", "cypress", "run"]
