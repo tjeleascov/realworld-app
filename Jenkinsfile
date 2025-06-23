@@ -2,6 +2,15 @@ pipeline {
   agent any
 
   stages {
+    stage('Checkout') {
+      steps {
+        git(
+          url: 'https://github.com/tjeleascov/realworld-app.git',
+          credentialsId: 'github-creds'
+        )
+      }
+    }
+
     stage('Start local server') {
       steps {
         script {
