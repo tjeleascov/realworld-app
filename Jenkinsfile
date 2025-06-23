@@ -1,24 +1,21 @@
 pipeline {
   agent any
-
   options {
     skipDefaultCheckout(true)
   }
-
   stages {
-    stage('Checkout') {
+    stage('Cleanup Workspace') {
       steps {
-        checkout([
-          $class: 'GitSCM',
-          branches: [[name: '*/master']], 
-          userRemoteConfigs: [[
-            url: 'https://github.com/tjeleascov/realworld-app.git',
-            credentialsId: 'github-creds'
-          ]]
-        ])
+        cleanWs()
       }
     }
-
+    stage('Checkout') {
+      steps {
+        git url: 'https://github.com/tjeleascov/realworld-app.git',
+            branch: 'master',
+            credentialsId: 'github-creds'
+      }
+    }
     stage('Start local server') {
       steps {
         script {
@@ -35,7 +32,6 @@ pipeline {
         }
       }
     }
-
     stage('Run Cypress Tests in Docker') {
       steps {
         script {
@@ -44,7 +40,6 @@ pipeline {
         }
       }
     }
-
     stage('Run Playwright Tests in Docker') {
       steps {
         script {
