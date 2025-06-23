@@ -8,10 +8,14 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git(
-          url: 'https://github.com/tjeleascov/realworld-app.git',
-          credentialsId: 'github-creds'
-        )
+        checkout([
+          $class: 'GitSCM',
+          branches: [[name: '*/master']], 
+          userRemoteConfigs: [[
+            url: 'https://github.com/tjeleascov/realworld-app.git',
+            credentialsId: 'github-creds'
+          ]]
+        ])
       }
     }
 
