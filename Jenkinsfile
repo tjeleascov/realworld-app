@@ -20,15 +20,17 @@ pipeline {
       steps {
         script {
           def serverImage = docker.build("my-server", "-f Dockerfile.server .")
-          serverImage.withRun("-p 3000:3000") { c ->
-            sh '''
-              echo "Waiting for server to start..."
-              until nc -z localhost 3000; do
-                echo "Still waiting for server..."
-                sleep 2
-              done
-            '''
-          }
+          serverContainer = serverImage.run("-d -p 3000:3000")
+
+          sh '''
+            echo "Waiting for server to start..."
+            sleep 10 // Дадим контейнеру немного времени на запуск
+            until nc -z localhost 3000; do
+              echo "Still waiting for server..."
+              sleep 2
+            done
+            echo "Server started!"
+          '''
         }
       }
     }
