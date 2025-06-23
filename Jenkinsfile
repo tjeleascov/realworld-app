@@ -24,7 +24,7 @@ pipeline {
 
           sh '''
             echo "Waiting for server to start..."
-            sleep 10 // Дадим контейнеру немного времени на запуск
+            sleep 10 
             until nc -z localhost 3000; do
               echo "Still waiting for server..."
               sleep 2
