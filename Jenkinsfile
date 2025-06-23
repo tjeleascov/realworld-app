@@ -1,12 +1,13 @@
 pipeline {
   agent any
-  options {
-    skipDefaultCheckout(true)
-  }
+  // options {
+  //   skipDefaultCheckout(true)
+  // }
   stages {
     stage('Cleanup Workspace') {
       steps {
         cleanWs()
+        sh 'rm -rf .git || true'
       }
     }
     stage('Checkout') {
