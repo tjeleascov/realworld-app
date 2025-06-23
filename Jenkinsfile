@@ -1,8 +1,8 @@
 pipeline {
   agent any
-  // options {
-  //   skipDefaultCheckout(true)
-  // }
+  environment {
+    DOCKER_NETWORK = "test-net"
+  }
   stages {
     stage('Cleanup Workspace') {
       steps {
@@ -10,6 +10,7 @@ pipeline {
         sh 'rm -rf .git || true'
       }
     }
+
     stage('Checkout') {
       steps {
         git url: 'https://github.com/tjeleascov/realworld-app.git',
@@ -17,37 +18,59 @@ pipeline {
             credentialsId: 'github-creds'
       }
     }
+
+    stage('Prepare Docker Network') {
+      steps {
+        script {
+          sh "docker network create ${DOCKER_NETWORK} || true"
+        }
+      }
+    }
+
     stage('Start local server') {
       steps {
         script {
           def serverImage = docker.build("my-server", "-f Dockerfile.server .")
-          serverContainer = serverImage.run("-d -p 3000:3000")
+          serverContainer = serverImage.run("--network ${DOCKER_NETWORK}", true)
 
           sh '''
-            echo "Waiting for server to start..."
-            sleep 10 
-            until nc -z localhost 3000; do
-              echo "Still waiting for server..."
+            echo "Waiting for server to start on port 3000..."
+            sleep 5
+            until nc -z 127.0.0.1 3000; do
+              echo "Still waiting..."
               sleep 2
             done
-            echo "Server started!"
+            echo "Server is up!"
           '''
         }
       }
     }
+
     stage('Run Cypress Tests in Docker') {
       steps {
         script {
           def cypressImage = docker.build("my-cypress-image", "-f Dockerfile.cypress .")
-          cypressImage.run()
+          cypressImage.run("--network ${DOCKER_NETWORK}")
         }
       }
     }
+
     stage('Run Playwright Tests in Docker') {
       steps {
         script {
           def pwImage = docker.build("my-playwright-image", "-f Dockerfile.playwright .")
-          pwImage.run()
+          pwImage.run("--network ${DOCKER_NETWORK}")
+        }
+      }
+    }
+  }
+
+  post {
+    always {
+      script {
+        if (serverContainer) {
+          echo "Stopping server container..."
+          serverContainer.stop()
         }
       }
     }
