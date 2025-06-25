@@ -3,9 +3,9 @@ FROM cypress/included:10.11.0
 WORKDIR /app
 
 COPY package*.json ./
-
 RUN npm install --legacy-peer-deps
 
-COPY ./cypress/tests/ ./cypress/tests/
+COPY cypress.config.js ./
+COPY cypress/ ./cypress/
 
 CMD ["npx", "cypress", "run"]

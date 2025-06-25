@@ -59,7 +59,8 @@ pipeline {
             steps {
                 script {
                     def cypressImage = docker.build('my-cypress-image', '-f Dockerfile.cypress .')
-                    cypressImage.run("--network ${DOCKER_NETWORK}")
+                    def runArgs = "--network ${DOCKER_NETWORK} -e CYPRESS_BASE_URL=http://localhost:3000"
+                    cypressImage.run(runArgs)
                 }
             }
         }
