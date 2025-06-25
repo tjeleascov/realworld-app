@@ -27,26 +27,26 @@ pipeline {
       }
     }
 
-stage('Start local server') {
-      steps {
-        script {
-          def serverImage = docker.build("my-server", "-f Dockerfile.server .")
-          serverContainer = serverImage.run("-d --name my-running-server -p 3000:3000 --network ${DOCKER_NETWORK}")
+script {
+    def serverImage     = docker.build('my-server', '-f Dockerfile.server .')
+    def serverContainer = serverImage.run("-d --name my-running-server -p 3000:3000")
 
-          sh '''
-            echo "Waiting for server to start..."
-            sleep 5
-            
-            until [ "$(curl -s -o /dev/null -w ''%{http_code}'' http://127.0.0.1:3000/)" == "200" ]; do
-              echo "Still waiting for a 200 OK response from http://127.0.0.1:3000/..."
-              sleep 5
-            done
-            
-            echo "Server is up and responding with 200 OK!"
-          '''
-        }
-      }
-    }
+    def ip = sh(returnStdout: true,
+                script: "docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${serverContainer.id}").trim()
+
+    sh """
+        echo "Container IP: ${ip}"
+        for i in {1..30}; do
+          if curl -fs http://${ip}:3000/ > /dev/null; then
+            echo 'Server is UP!'
+            exit 0
+          fi
+          echo 'Waiting…'; sleep 2
+        done
+        echo 'Timeout waiting for server' >&2
+        exit 1
+    """
+}
 
     stage('Run Cypress Tests in Docker') {
       steps {
