@@ -80,11 +80,11 @@ pipeline {
     post {
         always {
             script {
-                if (serverContainer) {
-                    echo "Stopping server container..."
-                    sh "docker logs ${serverContainer.id} || true"
-                    serverContainer.stop()
-                }
+                // if (serverContainer) {
+                //     echo "Stopping server container..."
+                //     sh "docker logs ${serverContainer.id} || true"
+                //     serverContainer.stop()
+                // }
                 // if (cypressContainer) {
                 //     echo "Stopping Cypress container..."
                 //     sh "docker logs ${cypressContainer.id} || true"
