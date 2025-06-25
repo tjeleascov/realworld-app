@@ -29,11 +29,11 @@ pipeline {
       }
     }
 
-stage('Start local server') {
+    stage('Start local server') {
       steps {
         script {
             def serverImage = docker.build('my-server', '-f Dockerfile.server .')
-            def serverContainer = serverImage.run("-d --name my-running-server -p 3000:3000")
+            serverContainer = serverImage.run("-d --name my-running-server -p 3000:3000")
 
             def ip = sh(returnStdout: true,
                         script: "docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${serverContainer.id}").trim()
