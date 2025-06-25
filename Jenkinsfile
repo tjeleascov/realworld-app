@@ -85,16 +85,16 @@ pipeline {
                     sh "docker logs ${serverContainer.id} || true"
                     serverContainer.stop()
                 }
-                if (cypressContainer) {
-                    echo "Stopping Cypress container..."
-                    sh "docker logs ${cypressContainer.id} || true"
-                    cypressContainer.stop()
-                }
-                if (pwContainer) {
-                    echo "Stopping Playwright container..."
-                    sh "docker logs ${pwContainer.id} || true"
-                    pwContainer.stop()
-                }
+                // if (cypressContainer) {
+                //     echo "Stopping Cypress container..."
+                //     sh "docker logs ${cypressContainer.id} || true"
+                //     cypressContainer.stop()
+                // }
+                // if (pwContainer) {
+                //     echo "Stopping Playwright container..."
+                //     sh "docker logs ${pwContainer.id} || true"
+                //     pwContainer.stop()
+                // }
                 sh "docker network rm ${DOCKER_NETWORK} || true"
             }
         }
