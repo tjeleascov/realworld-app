@@ -38,9 +38,9 @@ pipeline {
 
                     docker.image('curlimages/curl:8.7.1').inside(networkArg) {
                         sh '''
-                        echo "Waiting for 200 OK from http://my-running-server:3000/ …"
+                        echo "Waiting for 200 OK from http://localhost:3000/ …"
                         for i in $(seq 1 30); do
-                          if curl -fs http://my-running-server:3000/ > /dev/null; then
+                          if curl -fs http://localhost:3000/ > /dev/null; then
                             echo "Server is UP!"
                             exit 0
                           fi
