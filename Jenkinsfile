@@ -27,19 +27,22 @@ pipeline {
       }
     }
 
-    stage('Start local server') {
+stage('Start local server') {
       steps {
         script {
           def serverImage = docker.build("my-server", "-f Dockerfile.server .")
-          serverContainer = serverImage.run("-d --network ${DOCKER_NETWORK}")
+          serverContainer = serverImage.run("-d --name my-running-server -p 3000:3000 --network ${DOCKER_NETWORK}")
+
           sh '''
-            echo "Waiting for server to start on port 3000..."
+            echo "Waiting for server to start..."
             sleep 5
-            until nc -z 127.0.0.1 3000; do
-              echo "Still waiting..."
-              sleep 2
+            
+            until [ "$(curl -s -o /dev/null -w ''%{http_code}'' http://127.0.0.1:3000/)" == "200" ]; do
+              echo "Still waiting for a 200 OK response from http://127.0.0.1:3000/..."
+              sleep 5
             done
-            echo "Server is up!"
+            
+            echo "Server is up and responding with 200 OK!"
           '''
         }
       }
