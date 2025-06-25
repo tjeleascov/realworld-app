@@ -1,4 +1,5 @@
 pipeline {
+  def serverContainer = null
   agent any
   environment {
     DOCKER_NETWORK = "test-net"
