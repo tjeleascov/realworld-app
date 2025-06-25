@@ -31,8 +31,7 @@ pipeline {
       steps {
         script {
           def serverImage = docker.build("my-server", "-f Dockerfile.server .")
-          serverContainer = serverImage.run("--network ${DOCKER_NETWORK}", true)
-
+          serverContainer = serverImage.run("-d --network ${DOCKER_NETWORK}")
           sh '''
             echo "Waiting for server to start on port 3000..."
             sleep 5
