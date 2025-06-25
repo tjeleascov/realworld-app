@@ -1,12 +1,13 @@
-import path from "path";
-import _ from "lodash";
-import axios from "axios";
-import dotenv from "dotenv";
-import Promise from "bluebird";
-import { percyHealthCheck } from "@percy/cypress/task";
-import codeCoverageTask from "@cypress/code-coverage/task";
-import { defineConfig } from "cypress";
-import "@cypress/instrument-cra";
+const path = require("path");
+const _ = require("lodash");
+const axios = require("axios");
+const dotenv = require("dotenv");
+const Promise = require("bluebird");
+const { percyHealthCheck } = require("@percy/cypress/task");
+const codeCoverageTask = require("@cypress/code-coverage/task");
+require("@cypress/instrument-cra");
+
+const { defineConfig } = require("cypress");
 const { devServer } = require("@cypress/react/plugins/react-scripts");
 
 dotenv.config({ path: ".env.local" });
@@ -83,12 +84,9 @@ module.exports = defineConfig({
       on("task", {
         percyHealthCheck,
         async "db:seed"() {
-          // seed database with test data
           const { data } = await axios.post(`${testDataApiEndpoint}/seed`);
           return data;
         },
-
-        // fetch test data from a database (MySQL, PostgreSQL, etc...)
         "filter:database"(queryPayload) {
           return queryDatabase(queryPayload, (data, attrs) => _.filter(data.results, attrs));
         },
