@@ -4,6 +4,6 @@ WORKDIR /app
 
 COPY ./playwright/specs/ ./
 
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 CMD ["npx", "playwright", "test"]
