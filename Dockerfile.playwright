@@ -2,8 +2,12 @@ FROM mcr.microsoft.com/playwright:v1.44.0-jammy
 
 WORKDIR /app
 
+COPY package*.json ./
 COPY ./playwright/specs/ ./
 
 RUN npm install --legacy-peer-deps
+
+COPY playwright.config.ts ./
+COPY playwright/ ./playwright/
 
 CMD ["npx", "playwright", "test"]
