@@ -1,4 +1,6 @@
 def serverContainer = null
+def cypressContainer = null
+def pwContainer = null
 
 pipeline {
     agent any
@@ -59,8 +61,8 @@ pipeline {
             steps {
                 script {
                     def cypressImage = docker.build('my-cypress-image', '-f Dockerfile.cypress .')
-                    def runArgs = "--network ${DOCKER_NETWORK} -e CYPRESS_BASE_URL=http://localhost:3000"
-                    cypressImage.run(runArgs)
+                    def runArgs = "--network ${DOCKER_NETWORK} -e CYPRESS_BASE_URL=http://my-running-server:3000"
+                    cypressContainer = cypressImage.run(runArgs)
                 }
             }
         }
@@ -69,7 +71,7 @@ pipeline {
             steps {
                 script {
                     def pwImage = docker.build('my-playwright-image', '-f Dockerfile.playwright .')
-                    pwImage.run("--network ${DOCKER_NETWORK}")
+                    pwContainer = pwImage.run("--network ${DOCKER_NETWORK}")
                 }
             }
         }
@@ -79,9 +81,19 @@ pipeline {
         always {
             script {
                 if (serverContainer) {
-                    echo 'Stopping and removing server container...'
-                    sh "docker stop ${serverContainer.id} || true"
-                    sh "docker rm ${serverContainer.id} || true"
+                    echo "Stopping server container..."
+                    sh "docker logs ${serverContainer.id} || true"
+                    serverContainer.stop()
+                }
+                if (cypressContainer) {
+                    echo "Stopping Cypress container..."
+                    sh "docker logs ${cypressContainer.id} || true"
+                    cypressContainer.stop()
+                }
+                if (pwContainer) {
+                    echo "Stopping Playwright container..."
+                    sh "docker logs ${pwContainer.id} || true"
+                    pwContainer.stop()
                 }
                 sh "docker network rm ${DOCKER_NETWORK} || true"
             }
