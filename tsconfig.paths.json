@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@playwright-pages/*": ["playwright/pages/*"],
+      "@playwright-component/*": ["playwright/components/*"],
+      "@test-data/*": ["data/*"],
+      "@playwright-shared/*": ["playwright/shared/*"],
+      "@playwright-services/*": ["playwright/services/*"],
+      "@cypress-pages/*": ["cypress/pages/*"]
+    }
+  }
+}
