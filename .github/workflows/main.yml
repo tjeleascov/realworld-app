@@ -20,5 +20,8 @@ jobs:
           yarn start &
           npx wait-on http://localhost:3000
 
+      - name: Install Playwright
+        run: npx playwright install
+      
       - name: Run Playwright tests
         run: npx playwright test
