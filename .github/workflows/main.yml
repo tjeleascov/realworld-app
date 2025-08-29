@@ -1,12 +1,13 @@
 name: Playwright Tests with Local Server
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
 jobs:
-  test:
+  tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
@@ -14,7 +15,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Start server
+      - name: Start Server
         run: |
           yarn start &
           npx wait-on http://localhost:3000
