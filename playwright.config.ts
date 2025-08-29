@@ -1,4 +1,10 @@
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
+import { defineConfig } from "@playwright/test";
+
+export default defineConfig({
+  reporter: [["html", { outputFolder: "playwright-report", open: "never" }]],
+});
+
 module.exports = {
   timeout: 30000,
   projects: [
